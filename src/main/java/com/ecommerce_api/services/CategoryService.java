@@ -1,6 +1,7 @@
 package com.ecommerce_api.services;
 
 import com.ecommerce_api.entity.Category;
+import com.ecommerce_api.exceptions.CategoryException;
 import com.ecommerce_api.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,13 @@ public class CategoryService {
         category.setDescription(newCategory.getDescription());
         category.setImageUrl(newCategory.getImageUrl());
         categoryRepository.save(category);
+    }
+    public List<Category> getAllCategories() {
+        List<Category> categories = categoryRepository.findAll();
+        if (categories.isEmpty()) {
+            throw new CategoryException("No categories found");
+        }
+        return categories;
     }
 
 

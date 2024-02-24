@@ -2,6 +2,7 @@ package com.ecommerce_api.services;
 
 import com.ecommerce_api.dto.user.SignUpResponseDto;
 import com.ecommerce_api.dto.user.SignupDto;
+import com.ecommerce_api.entity.AuthenticationToken;
 import com.ecommerce_api.entity.User;
 import com.ecommerce_api.exceptions.CustomException;
 import com.ecommerce_api.repository.UserRepository;
@@ -21,6 +22,8 @@ import java.util.Objects;
 public class UserService {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    AuthenticationService authenticationService;
 
     Logger logger = LoggerFactory.getLogger(UserService.class);
 
@@ -46,6 +49,10 @@ public class UserService {
         try {
             // save the User
             userRepository.save(user);
+            // generate token for user
+            final AuthenticationToken authenticationToken = new AuthenticationToken(user);
+            // save token in database
+            authenticationService.saveConfirmationToken(authenticationToken);
             // success in creating
             return new SignUpResponseDto("success", "user created successfully");
         } catch (Exception e) {

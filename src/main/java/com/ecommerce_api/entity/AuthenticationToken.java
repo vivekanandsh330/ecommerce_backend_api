@@ -63,4 +63,8 @@ public class AuthenticationToken {
 
     public AuthenticationToken() {
     }
+
+    public AuthenticationToken(Integer id) {
+        this.id = id;
+    }
 }

@@ -1,10 +1,11 @@
 package com.ecommerce_api.services;
 
+import com.ecommerce_api.entity.User;
 import com.ecommerce_api.config.MessageStrings;
 import com.ecommerce_api.entity.AuthenticationToken;
 import com.ecommerce_api.exceptions.AuthenticationFailException;
 import com.ecommerce_api.repository.TokenRepository;
-import org.apache.catalina.User;
+import com.ecommerce_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +26,11 @@ public class AuthenticationService {
         return repository.findTokenByUser(user);
     }
 
-    // get Uer from the token
+    // get User from the token
     public User getUser(String token) {
         AuthenticationToken authenticationToken = repository.findTokenByToken(token);
         if (Objects.nonNull(authenticationToken)) {
-            if (Objects.nonNull(authenticationToken.getUser())) {
-                return (User) authenticationToken.getUser();
-            }
+            return authenticationToken.getUser();
         }
         return null;
     }

@@ -1,9 +1,12 @@
 package com.ecommerce_api.services;
-
+import com.ecommerce_api.entity.User;
+import com.ecommerce_api.config.MessageStrings;
+import com.ecommerce_api.dto.user.SignInDto;
+import com.ecommerce_api.dto.user.SignInResponseDto;
 import com.ecommerce_api.dto.user.SignUpResponseDto;
 import com.ecommerce_api.dto.user.SignupDto;
 import com.ecommerce_api.entity.AuthenticationToken;
-import com.ecommerce_api.entity.User;
+import com.ecommerce_api.exceptions.AuthenticationFailException;
 import com.ecommerce_api.exceptions.CustomException;
 import com.ecommerce_api.repository.UserRepository;
 import jakarta.xml.bind.DatatypeConverter;
@@ -68,5 +71,34 @@ public class UserService {
         String myHash = DatatypeConverter
                 .printHexBinary(digest).toUpperCase();
         return myHash;
+    }
+
+    public SignInResponseDto signIn(SignInDto signInDto) throws AuthenticationFailException, CustomException {
+        // first find User by email
+        User user = userRepository.findByEmail(signInDto.getEmail());
+        if(!Objects.nonNull(user)){
+            throw new AuthenticationFailException("user not present");
+        }
+        try {
+            // check if password is right
+            if (!user.getPassword().equals(hashPassword(signInDto.getPassword()))){
+                // passwords do not match
+                throw  new AuthenticationFailException(MessageStrings.WRONG_PASSWORD);
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            logger.error("hashing password failed {}", e.getMessage());
+            throw new CustomException(e.getMessage());
+        }
+
+        AuthenticationToken token = authenticationService.getToken(user);
+
+
+        if(!Objects.nonNull(token)) {
+            // token not present
+            throw new CustomException(MessageStrings.AUTH_TOEKN_NOT_PRESENT);
+        }
+
+        return new SignInResponseDto ("success", token.getToken());
     }
     }

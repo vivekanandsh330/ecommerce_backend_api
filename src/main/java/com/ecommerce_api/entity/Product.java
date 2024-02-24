@@ -1,5 +1,6 @@
 package com.ecommerce_api.entity;
 
+import com.ecommerce_api.dto.ProductDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -32,6 +33,11 @@ public class Product {
         this.availability = availability;
         this.category = category;
     }
+
+    public Product(ProductDto productDto, Category category) {
+
+    }
+
 
 
     public Integer getId() {

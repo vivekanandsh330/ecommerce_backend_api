@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Objects;
+
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
@@ -40,6 +42,7 @@ public class CategoryController {
             categoryService.updateCategory(categoryID, category);
             return new ResponseEntity<>(new ApiResponse(true, "updated the category"), HttpStatus.OK);
         }
+
         // If the category doesn't exist then throw an exception.
         throw new CategoryException("Category does not exist");
     }

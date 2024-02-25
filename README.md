@@ -1,8 +1,5 @@
-# ecommerce_backend_api
- Ecommerce backend apis
- 
+# Ecommerce_Backend_API
 Backend
-
 * This is a Maven Project. Ensure, Maven is installed on your system.
 * It is Recommended that you use Linux Based OS.
 * It might happen that you have installed XAMPP/LAMPP software (by Bitnami) on your system. Instead of using the db provided by XAMPP/LAMPP by bitnami, it is recommended that you install ``mariadb-server`` and use it as  database while running this application.  
@@ -15,16 +12,41 @@ Backend
 1. Import `database-dump.sql` in it.
 1. To run the application, run the command ``sh run.sh`` i.e. execute the ``run.sh`` file. 
 
-   
-## Category/Update/{id}
-* The input for updating the category via API is
+
+## Create a Category (POST Request)
+* URL: http://localhost:8080/category/create
+* Method: POST
+* Headers:
+* Content-Type: application/json
+* Body: Raw JSON
 ```
 {
-    "categoryName":"name",
-    "imageUrl":"url",
-    "description":"desc"
+    "id":"1",
+    "category_name": "Electronics",
+    "description": "Electronics category description",
+    "image_Urls" : ""
 }
 ```
+## Update a Category (POST Request)
+* URL: http://localhost:8080/category/update/{categoryID}
+* Replace {categoryID} with the actual ID of the category you want to update.
+* Method: POST
+* Headers:
+* Content-Type: application/json
+* Body: Raw JSON
+```
+{
+    "id":"1",
+    "category_name": "Electronics",
+    "description": "Updated Electronics category description",
+    "image_Urls" : ""
+}
+```
+## Get All Categories (GET Request)
+* URL: http://localhost:8080/category/
+* Method: GET
+* Headers: None
+* Body: Not needed for GET requests.
 
 
 ### In case of "java.lang.IllegalStateException: Unable to load cache item error":

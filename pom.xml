@@ -6,13 +6,16 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.2</version>
+
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.</groupId>
     <artifactId>ecommerce_api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ecommerce_api</name>
     <description>Backend Ecommerce API using Spring Boot</description>
+
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -56,6 +59,7 @@
         </dependency>
 
 
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -86,8 +90,8 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
-            <scope>provided</scope>
         </dependency>
+
 
     </dependencies>
 

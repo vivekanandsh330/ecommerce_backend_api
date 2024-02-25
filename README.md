@@ -4,7 +4,7 @@ Backend
 * It is Recommended that you use Linux Based OS.
 * It might happen that you have installed XAMPP/LAMPP software (by Bitnami) on your system. Instead of using the db provided by XAMPP/LAMPP by bitnami, it is recommended that you install ``mariadb-server`` and use it as  database while running this application.  
 
-###How to run in local
+## How to run in local
 1. Rename ``src/main/resources/application.properties.example`` to ``src/main/resources/application.properties``.
 1. Change the Application Properties (E.g. username/password of DB) present in ``resources/application.properties``  according to your local postgres-server.
 1. Go to application.properties and comment / uncomment the corresponding front-end url and enter the STRIPE API Keys
@@ -14,7 +14,7 @@ Backend
 
 
 ## Create a Category (POST Request)
-* URL: http://localhost:8080/category/create
+* URL: http://localhost:9292/category/create
 * Method: POST
 * Headers:
 * Content-Type: application/json
@@ -28,7 +28,7 @@ Backend
 }
 ```
 ## Update a Category (POST Request)
-* URL: http://localhost:8080/category/update/{categoryID}
+* URL: http://localhost:9292/category/update/{categoryID}
 * Replace {categoryID} with the actual ID of the category you want to update.
 * Method: POST
 * Headers:
@@ -43,13 +43,14 @@ Backend
 }
 ```
 ## Get All Categories (GET Request)
-* URL: http://localhost:8080/category/
+* URL: http://localhost:9292/category/
 * Method: GET
 * Headers: None
 * Body: Not needed for GET requests.
+* Like this many more request for other api tested using Postman
 
 
-### In case of "java.lang.IllegalStateException: Unable to load cache item error":
+## In case of "java.lang.IllegalStateException: Unable to load cache item error":
 - Go into pom.xml and comment out the scope for the "spring-boot-starter-tomcat" dependency
 
 

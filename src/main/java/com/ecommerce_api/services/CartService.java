@@ -95,4 +95,7 @@ public class CartService {
             throw new NoSuchElementException("Cart item not found");
         }
     }
+    public void deleteUserCartItems(User user) {
+        cartRepository.deleteByUser(user);
+    }
 }

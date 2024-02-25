@@ -1,6 +1,6 @@
 package com.ecommerce_api.entity;
 
-import com.ecommerce_api.dto.ProductDto;
+import com.ecommerce_api.dto.product.ProductDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

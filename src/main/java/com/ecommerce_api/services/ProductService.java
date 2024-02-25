@@ -1,6 +1,6 @@
 package com.ecommerce_api.services;
 
-import com.ecommerce_api.dto.ProductDto;
+import com.ecommerce_api.dto.product.ProductDto;
 import com.ecommerce_api.entity.Category;
 import com.ecommerce_api.entity.Product;
 import com.ecommerce_api.repository.ProductRepository;

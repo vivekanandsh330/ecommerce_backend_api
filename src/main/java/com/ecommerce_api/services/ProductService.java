@@ -3,6 +3,7 @@ package com.ecommerce_api.services;
 import com.ecommerce_api.dto.product.ProductDto;
 import com.ecommerce_api.entity.Category;
 import com.ecommerce_api.entity.Product;
+import com.ecommerce_api.exceptions.ProductNotExistsException;
 import com.ecommerce_api.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,5 +70,12 @@ public class ProductService {
             product.setAvailability(availability);
             productRepository.save(product);
         }
+    }
+    public Product findById(Integer productId) throws ProductNotExistsException {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if (optionalProduct.isEmpty()) {
+            throw new ProductNotExistsException("product id is invalid: " + productId);
+        }
+        return optionalProduct.get();
     }
 }
